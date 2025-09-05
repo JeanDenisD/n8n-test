@@ -1,0 +1,86 @@
+{
+  "createdAt": "2025-09-05T09:59:58.223Z",
+  "updatedAt": "2025-09-05T09:59:58.223Z",
+  "id": "XlmbDaOOPQQzA646",
+  "name": "Webhook to Log Test",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "id": "webhook-1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        300,
+        200
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "test-webhook",
+        "responseMode": "responseNode"
+      }
+    },
+    {
+      "id": "log-1",
+      "name": "Log Data",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        500,
+        200
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "response-1",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        700,
+        200
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"status\": \"success\", \"message\": \"Data logged successfully\" }"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Log Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Data": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": true
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "41dc3065-2c0d-452d-b47b-ff3c48450fc4",
+  "triggerCount": 0
+}
